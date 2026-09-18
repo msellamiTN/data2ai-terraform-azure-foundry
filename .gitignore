@@ -1,0 +1,15 @@
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tfplan.json
+crash.log
+crash.*.log
+*.tfvars
+!*.tfvars.example
+.env
+.env.*
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

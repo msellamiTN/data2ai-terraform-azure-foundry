@@ -2,35 +2,18 @@
 
 ## The learning loop
 
-Every lab follows:
+**LEARN → BUILD → VALIDATE → BREAK → FIX → CHALLENGE → SOLUTION**
 
-1. **Learn** — understand the minimum concepts required.
-2. **Build** — deploy a working environment.
-3. **Validate** — prove that it works with explicit checks.
-4. **Break** — introduce a realistic failure.
-5. **Fix** — diagnose from evidence.
-6. **Challenge** — solve a variant independently.
-7. **Solution** — compare against a reference implementation.
+1. Learn the minimum concepts required.
+2. Build a working environment.
+3. Validate with explicit checks.
+4. Break a realistic component.
+5. Diagnose from evidence and fix it.
+6. Solve a variant independently.
+7. Compare with the reference solution.
 
-## Troubleshooting mindset
-
-Do not start by guessing the fix.
-
-Use:
+## Troubleshooting
 
 **Symptom → Evidence → Diagnosis → Root Cause → Fix → Validation → Prevention**
 
-## Practical ratio
-
-The program targets approximately **70% hands-on / 30% conceptual** learning.
-
-## Learner rule
-
-A successful lab is not only a deployment that works. The learner should be able to explain:
-
-- what was created,
-- why it was created,
-- how Terraform manages it,
-- how identity and permissions work,
-- how to validate it,
-- and how to recover when it fails.
+A successful lab means the learner can explain what was created, why it exists, how Terraform manages it, how identity works, and how recovery is validated.

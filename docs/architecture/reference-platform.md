@@ -17,9 +17,7 @@ flowchart LR
     MI --> KV
 ```
 
-## Scenario architectures
-
-### RAG
+## RAG
 
 ```mermaid
 flowchart LR
@@ -29,29 +27,17 @@ S --> R[RAG Application]
 R --> F[Microsoft Foundry]
 ```
 
-### Agent
+## Agent
 
 ```mermaid
 flowchart LR
 U[User] --> A[Foundry Agent]
 A --> L[Model]
 A --> S[Search]
-A --> TOOLS[Enterprise Tools]
+A --> T[Enterprise Tools]
 A --> ID[Identity]
 ```
 
-### Document intelligence
-
-```mermaid
-flowchart LR
-I[Invoice / Document] --> ST[Storage]
-ST --> DI[Document Intelligence]
-DI --> DATA[Structured Data]
-DATA --> APP[AI Application]
-```
-
-## Security
-
-Identity and authorization should be reasoned about as:
+## Security model
 
 **Identity → Role → Scope → Permission**

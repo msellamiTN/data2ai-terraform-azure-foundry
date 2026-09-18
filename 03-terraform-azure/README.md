@@ -1,13 +1,10 @@
-# Course 03 — Terraform Engineering on Azure
+# Course 03 — 03 terraform azure
 
 ## Mission
-Turn working Terraform into maintainable engineering.
+Engineer maintainable Azure infrastructure with Terraform and progress toward AI platform engineering.
 
 ## Competencies
-Project structure, naming, tagging, modules, remote state, environments and validation.
-
-## Labs
-Project baseline, naming/tags, modules, remote state, environments, validation.
+Architecture, naming, tagging, modules, state, environments and validation.
 
 ## Exit criteria
-A clean repository can be reviewed, validated and deployed without hard-coded environment secrets.
+The learner can review, validate and safely promote Terraform changes.

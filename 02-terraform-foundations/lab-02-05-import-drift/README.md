@@ -1,28 +1,64 @@
-# lab-02-05-import-drift — lab 02 05 import drift
+# Lab 02-05 — Import Drift
 
-> **Data2AI Academy — Professional Hands-on Lab**
+> 🟢 **Build Lab** · 45–75 min
 
 ## Mission
-Build this capability as repeatable Azure/Terraform engineering, validate it, break it deliberately, then recover it.
+Build **Import Drift** as an executable Azure engineering workshop.
 
 ## Prerequisites
-Git, Azure CLI, Terraform, PowerShell/Bash and a non-production lab subscription.
+```powershell
+git --version
+az version
+terraform version
+az account show
+```
 
-## Tasks
-1. Inspect starter inputs and expected behavior.
-2. Implement the smallest correct change.
-3. Run formatting and validation checks.
-4. Review the plan before applying.
-5. Validate with observable evidence.
+## Build
+```powershell
+cd data2ai-terraform-azure-foundry/02-terraform-foundations/lab-02-05-import-drift
+Copy-Item starter student-work -Recurse -Force
+cd student-work
+code .
+```
+Create/edit the files in this workspace. Keep names, regions and IDs parameterized. Never store secrets.
 
-## Break/Fix
-**Symptom → Evidence → Diagnosis → Root Cause → Fix → Validation → Prevention**.
+## Execute
+```powershell
+terraform fmt -recursive
+terraform init
+terraform validate
+terraform plan
+terraform apply
+```
 
-## Challenge
-Solve a meaningful variation independently and explain the design choice.
+## Validate independently
+```powershell
+az account show --query "{subscription:id,tenant:tenantId}" --output table
+az group show --name rg-data2ai-02-05-lab --output json
+terraform output
+terraform state list
+```
 
-## Cleanup
-Remove only lab resources and verify the target scope.
+## Break / Fix 🔴
+Introduce a controlled error relevant to this topic. Capture Symptom → Evidence → Diagnosis → Root Cause → Fix → Validation → Prevention. Repair and rerun the validation sequence.
+
+## Challenge ⚫
+Create a working variant without opening the solution folder. Preserve parameterization, security/tagging constraints and independent validation.
 
 ## Reference solution
-Consult after the challenge and compare engineering decisions.
+Only after the challenge: Get-ChildItem solution -Recurse. Compare one design choice.
+
+## Cleanup
+```powershell
+terraform plan -destroy
+terraform destroy
+```
+
+## Completion
+- [ ] files created/edited
+- [ ] plan reviewed
+- [ ] deployment executed
+- [ ] independent validation passed
+- [ ] Break/Fix repaired
+- [ ] challenge completed
+- [ ] cleanup completed

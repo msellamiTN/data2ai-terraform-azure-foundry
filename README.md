@@ -1,32 +1,37 @@
-# Data2AI Terraform Azure AI Foundry
+# Data2AI Academy — Terraform + Azure AI Foundry
 
-Professional self-paced academy for engineering Azure AI platforms with Terraform.
+> **Engineer AI infrastructure. Don’t just learn commands.**
 
-> **Read less. Build more. Break it. Fix it. Explain it. Automate it.**
+Hands-on academy for building secure, repeatable Azure AI platforms with Terraform and Microsoft Foundry.
 
 ## Learning loop
-**LEARN → BUILD → VALIDATE → BREAK → FIX → CHALLENGE → SOLUTION**
+
+**LEARN → BUILD → VALIDATE → BREAK → FIX → CHALLENGE → SOLUTION → CLEANUP**
+
+Every workshop is designed for execution: navigate the repository, create/edit files, run commands, inspect results, diagnose a controlled failure, prove completion, and clean up.
 
 ## Courses
 
-| # | Course | Outcome |
-|---|---|---|
-| 00 | Onboarding | Verified local/cloud lab workstation |
-| 01 | Azure Foundations | Azure resource, identity and RBAC fundamentals |
-| 02 | Terraform Fundamentals | Repeatable Azure infrastructure and state management |
-| 03 | Terraform on Azure | Maintainable, validated Azure IaC |
-| 04 | Foundry Foundations | AI platform foundation engineering |
-| 05 | Foundry Scenarios | RAG, agents and AI service scenarios |
-| 06 | Secure AI Platform | Identity, secrets and private networking |
-| 07 | Enterprise Terraform | Modules, environments, brownfield and testing |
-| 08 | DevOps & CI/CD | Controlled plan/apply promotion |
-| 09 | Observability & FinOps | Operable, governed and cost-aware platform |
-| 10 | Capstone | End-to-end enterprise AI platform |
+| Course | Focus |
+|---|---|
+| 00 | Onboarding & toolchain |
+| 01 | Azure foundations |
+| 02 | Terraform foundations |
+| 03 | Terraform engineering on Azure |
+| 04 | Microsoft Foundry foundations |
+| 05 | Foundry AI scenarios |
+| 06 | Secure AI platform engineering |
+| 07 | Enterprise Terraform |
+| 08 | DevOps & CI/CD |
+| 09 | Observability, governance & FinOps |
+| 10 | Enterprise AI platform capstone |
 
 ## Lab contract
-Every lab separates learner work from reference material: starter → broken → validation → solution.
 
-A lab is complete only when the learner can **prove** the result and explain the failure/recovery path.
+Each lab contains a mission, prerequisites, exact commands, files to create/edit, expected outputs, independent validation, Break/Fix, challenge, reference solution, cleanup and troubleshooting.
 
-## Troubleshooting
-**Symptom → Evidence → Diagnosis → Root Cause → Fix → Validation → Prevention**
+## Repository quality standard
+
+A successful `terraform apply` is **not** considered sufficient evidence. Learners must independently validate the resulting Azure state, diagnose one deliberate failure, repair it, and document the evidence.
+
+**Data2AI Academy — Read less. Build more. Break it. Fix it. Explain it. Automate it.**

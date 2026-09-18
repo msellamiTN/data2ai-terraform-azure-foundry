@@ -1,25 +1,77 @@
-# 06-speech-language — 06 speech language
+# Lab — Speech Language
 
-> **Data2AI Academy — Professional Hands-on Lab**
+> 🟢 Data2AI Academy — Learner Execution Guide
 
 ## Mission
-Build this AI platform capability as repeatable engineering, validate observable behavior, then diagnose a controlled failure.
+Build this Foundry AI scenario as an engineer. Create/edit files, execute commands, inspect outputs, validate the service contract, diagnose a controlled failure and complete the challenge.
 
-## Tasks
-1. Inspect the starter material and dependencies.
-2. Implement the minimum correct configuration.
-3. Validate configuration and deployment evidence.
-4. Break one dependency deliberately.
-5. Diagnose using evidence and restore service.
+## 1. Preflight
+```powershell
+git --version
+az version
+terraform version
+az account show
+```
 
-## Break/Fix
-**Symptom → Evidence → Diagnosis → Root Cause → Fix → Validation → Prevention**.
+## 2. Workspace
+```powershell
+New-Item -ItemType Directory -Name student-work -Force
+cd student-work
+code .
+```
 
-## Challenge
-Adapt the scenario to one new enterprise constraint and explain the design.
+## 3. BUILD
+Start from requirements and architecture. Create the important project files yourself. Identify the role of Foundry and every supporting Azure AI service.
 
-## Cleanup
-Remove only lab resources.
+## 4. RUN
+```powershell
+terraform fmt
+terraform init
+terraform validate
+terraform plan
+```
+Read the plan before:
+```powershell
+terraform apply
+```
 
-## Reference solution
-Consult after the challenge.
+## 5. READ OUTPUT
+After every command answer:
+1. What did it do?
+2. What did the output prove?
+3. What changed?
+4. What should I inspect next?
+
+## 6. VALIDATE
+Compare Terraform configuration, state and Azure. Then verify the AI scenario contract: required resource/project/model/service configuration and expected functional behavior.
+
+## 7. EVIDENCE
+Capture plan, apply, service inspection and validation outputs in evidence/.
+
+## 8. BREAK/FIX
+Reproduce the supplied failure. Diagnose with:
+```text
+Symptom → Evidence → Diagnosis → Root Cause → Fix → Validation → Prevention
+```
+Check API/provider, configuration, identity/RBAC, network and service limits.
+
+## 9. CHALLENGE
+Implement the independent variation before opening solution. Prove it with outputs and validation.
+
+## 10. SOLUTION
+Compare only after the challenge.
+
+## 11. CLEANUP
+```powershell
+terraform plan -destroy
+terraform destroy
+```
+
+## Definition of Done
+- [ ] I created/edited the project.
+- [ ] I executed and interpreted commands.
+- [ ] I validated Azure and the AI scenario.
+- [ ] I completed Break/Fix.
+- [ ] I completed the challenge first.
+- [ ] I captured evidence.
+- [ ] I cleaned up.

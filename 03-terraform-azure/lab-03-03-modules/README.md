@@ -1,28 +1,62 @@
-# lab-03-03-modules — lab 03 03 modules
+# Lab 03-03 — modules
 
-> **Data2AI Academy — Professional Hands-on Lab**
+> 🟢 **Build Lab** · 45–75 min
 
 ## Mission
-Build this capability as repeatable Azure/Terraform engineering, validate it, break it deliberately, then recover it.
+Build, validate, break, repair and clean up this Azure/Terraform capability.
 
-## Prerequisites
-Git, Azure CLI, Terraform, PowerShell/Bash and a non-production lab subscription.
+## 1. Prerequisites
+```powershell
+git --version
+az version
+terraform version
+az account show
+```
 
-## Tasks
-1. Inspect starter inputs and expected behavior.
-2. Implement the smallest correct change.
-3. Run formatting and validation checks.
-4. Review the plan before applying.
-5. Validate with observable evidence.
+## 2. Build
+```powershell
+cd data2ai-terraform-azure-foundry/03-terraform-azure/lab-03-03-modules
+Copy-Item starter student-work -Recurse -Force
+cd student-work
+code .
+```
+Create/edit the files in student-work. Keep inputs parameterized and never commit secrets.
 
-## Break/Fix
-**Symptom → Evidence → Diagnosis → Root Cause → Fix → Validation → Prevention**.
+## 3. Execute
+```powershell
+terraform fmt -recursive
+terraform init
+terraform validate
+terraform plan
+terraform apply
+```
 
-## Challenge
-Solve a meaningful variation independently and explain the design choice.
+## 4. Validate independently
+```powershell
+az account show --query "{subscription:id,tenant:tenantId}" --output table
+az group show --name rg-data2ai-03-03-lab --output json
+terraform output
+terraform state list
+```
 
-## Cleanup
-Remove only lab resources and verify the target scope.
+## 5. Break / Fix 🔴
+Introduce one controlled failure. Document Symptom, Evidence, Diagnosis, Root Cause, Fix, Validation and Prevention. Repair and rerun the full validation sequence.
 
-## Reference solution
-Consult after the challenge and compare engineering decisions.
+## 6. Challenge ⚫
+Build a working variant without opening solution/. Preserve parameterization, security/tagging requirements and independent validation.
+
+## 7. Reference solution
+After the challenge, inspect solution/ and record one meaningful design difference.
+
+## 8. Cleanup
+```powershell
+terraform plan -destroy
+terraform destroy
+```
+
+## Completion
+- [ ] build complete
+- [ ] validation passed
+- [ ] Break/Fix repaired
+- [ ] challenge complete
+- [ ] cleanup complete

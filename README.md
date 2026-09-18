@@ -2,36 +2,63 @@
 
 > **Engineer AI infrastructure. Don’t just learn commands.**
 
-Hands-on academy for building secure, repeatable Azure AI platforms with Terraform and Microsoft Foundry.
+This repository is a **build-first, self-paced engineering academy**. The learner creates and edits project files, executes commands, reads outputs, validates Azure independently, diagnoses controlled failures, and completes challenges before opening reference solutions.
 
 ## Learning loop
 
-**LEARN → BUILD → VALIDATE → BREAK → FIX → CHALLENGE → SOLUTION → CLEANUP**
+**LEARN → BUILD → RUN → READ OUTPUT → VALIDATE → BREAK → FIX → CHALLENGE → SOLUTION → CLEANUP**
 
-Every workshop is designed for execution: navigate the repository, create/edit files, run commands, inspect results, diagnose a controlled failure, prove completion, and clean up.
+## 11-course journey
 
-## Courses
-
-| Course | Focus |
+| Course | Outcome |
 |---|---|
-| 00 | Onboarding & toolchain |
-| 01 | Azure foundations |
-| 02 | Terraform foundations |
-| 03 | Terraform engineering on Azure |
-| 04 | Microsoft Foundry foundations |
-| 05 | Foundry AI scenarios |
+| 00 | Verified learner workstation and Azure identity |
+| 01 | Azure resources, CLI and RBAC fundamentals |
+| 02 | Terraform projects, variables, state, import and drift |
+| 03 | Maintainable Terraform on Azure |
+| 04 | Microsoft Foundry platform foundations |
+| 05 | End-to-end Foundry AI scenarios |
 | 06 | Secure AI platform engineering |
-| 07 | Enterprise Terraform |
-| 08 | DevOps & CI/CD |
-| 09 | Observability, governance & FinOps |
-| 10 | Enterprise AI platform capstone |
+| 07 | Enterprise Terraform architecture |
+| 08 | CI/CD and controlled promotion |
+| 09 | Observability, governance and FinOps |
+| 10 | Independent enterprise AI platform capstone |
 
-## Lab contract
+## Learner contract
 
-Each lab contains a mission, prerequisites, exact commands, files to create/edit, expected outputs, independent validation, Break/Fix, challenge, reference solution, cleanup and troubleshooting.
+Every lab must answer four questions:
 
-## Repository quality standard
+1. **What did I build?**
+2. **What did the command output prove?**
+3. **What failed and why?**
+4. **How did I prove the fix?**
 
-A successful `terraform apply` is **not** considered sufficient evidence. Learners must independently validate the resulting Azure state, diagnose one deliberate failure, repair it, and document the evidence.
+A successful `terraform apply` alone is **not sufficient evidence**.
 
-**Data2AI Academy — Read less. Build more. Break it. Fix it. Explain it. Automate it.**
+## Standard lab structure
+
+```text
+MISSION
+  ↓
+CREATE / EDIT FILES
+  ↓
+RUN COMMAND
+  ↓
+READ OUTPUT
+  ↓
+VALIDATE
+  ↓
+BREAK
+  ↓
+DIAGNOSE
+  ↓
+FIX
+  ↓
+CHALLENGE
+  ↓
+SOLUTION
+  ↓
+CLEANUP
+```
+
+Start with [Learner Guide](./learner-guide.md).

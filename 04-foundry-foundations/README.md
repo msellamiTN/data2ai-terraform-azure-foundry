@@ -1,10 +1,37 @@
-# Course 04 — 04 foundry foundations
+# COURSE 04 — Microsoft Foundry Foundations
 
 ## Mission
-Engineer maintainable Azure infrastructure with Terraform and progress toward AI platform engineering.
 
-## Competencies
-Architecture, naming, tagging, modules, state, environments and validation.
+Understand the Foundry resource hierarchy and build the platform progressively.
 
-## Exit criteria
-The learner can review, validate and safely promote Terraform changes.
+## Labs
+
+- **04-01 Foundation** — create and inspect the Foundry foundation.
+- **04-02 Project Exploration** — explore projects, models, deployments and connections.
+- **04-03 Terraform** — reproduce the understood platform with IaC.
+- **04-04 Model Deployment** — configure and validate model deployments.
+- **04-05 Break/Fix** — diagnose real configuration failures.
+
+## Platform progression
+
+```text
+Resource Group
+ ↓
+Foundry Resource
+ ↓
+Project
+ ↓
+Model
+ ↓
+Deployment
+ ↓
+Connections / Identity
+```
+
+## Learner rule
+
+First understand the platform manually. Then automate the architecture. This prevents Terraform syntax from hiding Azure AI concepts.
+
+## Break/Fix
+
+Learners investigate model/version, region, capacity/quota, provider/API and permission errors from evidence.

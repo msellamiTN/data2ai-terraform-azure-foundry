@@ -1,10 +1,30 @@
-# Course 09 — Observability, Governance & FinOps
+# COURSE 09 — Observability, Governance & FinOps
 
 ## Mission
-Operate the AI platform with measurable health, governance and cost controls.
 
-## Competencies
-Azure Monitor, logs, metrics, governance, budgets, alerts, tagging, cost allocation and optimization.
+Operate the AI platform after deployment.
 
-## Exit criteria
-The learner can identify operational signals, governance controls and cost drivers and validate remediation.
+## Labs
+
+- Monitoring
+- Governance
+- Cost Management
+- FinOps Break/Fix
+
+## Operational loop
+
+```text
+DEPLOY
+ ↓
+OBSERVE
+ ↓
+GOVERN
+ ↓
+MEASURE COST
+ ↓
+OPTIMIZE
+ ↓
+VALIDATE
+```
+
+Learners must connect infrastructure decisions to operational evidence: metrics/logs, policy state, tags, cost allocation and optimization changes.

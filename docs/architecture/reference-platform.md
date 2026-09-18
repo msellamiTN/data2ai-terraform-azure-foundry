@@ -1,43 +1,38 @@
-# Reference Azure AI Platform
-
-## Logical architecture
+# Reference Platform Architecture
 
 ```mermaid
 flowchart LR
-    G[Git] --> T[Terraform]
-    T --> E[Azure Environments]
-    E --> F[Microsoft Foundry]
-    F --> S[Azure AI Search]
-    F --> ST[Azure Storage]
-    F --> KV[Azure Key Vault]
-    F --> M[Azure Monitor]
-    MI[Managed Identity] --> F
-    MI --> S
-    MI --> ST
-    MI --> KV
+  G[Git] --> T[Terraform]
+  T --> D[DEV]
+  T --> P[PROD]
+  D --> F[Microsoft Foundry]
+  F --> S[Azure AI Search]
+  F --> ST[Storage]
+  F --> KV[Key Vault]
+  F --> MON[Azure Monitor]
+  ID[Managed Identity + RBAC] --> F
+  ID --> S
+  ID --> ST
+  ID --> KV
 ```
 
 ## RAG
-
 ```mermaid
 flowchart LR
-D[Documents] --> ST[Azure Storage]
-ST --> S[Azure AI Search]
-S --> R[RAG Application]
-R --> F[Microsoft Foundry]
+ DOC[Documents] --> ST[Storage]
+ ST --> IDX[AI Search]
+ Q[User Query] --> R[RAG Orchestrator]
+ IDX --> R
+ R --> F[Foundry Model]
+ F --> A[Grounded Answer]
 ```
 
 ## Agent
-
 ```mermaid
 flowchart LR
-U[User] --> A[Foundry Agent]
-A --> L[Model]
-A --> S[Search]
-A --> T[Enterprise Tools]
-A --> ID[Identity]
+ U[User] --> A[Foundry Agent]
+ A --> M[Model]
+ A --> S[Search]
+ A --> TOOL[Enterprise Tool]
+ A --> ID[Identity]
 ```
-
-## Security model
-
-**Identity → Role → Scope → Permission**

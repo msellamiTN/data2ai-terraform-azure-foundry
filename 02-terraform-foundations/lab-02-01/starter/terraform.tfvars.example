@@ -1,0 +1,8 @@
+resource_group_name = "rg-data2ai-tf-lab"
+location            = "westeurope"
+
+tags = {
+  environment = "lab"
+  managed_by  = "terraform"
+  course      = "02"
+}

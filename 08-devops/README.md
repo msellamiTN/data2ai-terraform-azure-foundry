@@ -1,10 +1,32 @@
-# Course 08 — DevOps & AI Platform CI/CD
+# COURSE 08 — DevOps & AI Platform CI/CD
 
 ## Mission
-Turn infrastructure changes into controlled, auditable delivery.
 
-## Competencies
-Git workflow, pull-request validation, Terraform plan artifacts, approvals, promotion and pipeline troubleshooting.
+Automate Terraform validation, planning and controlled promotion.
 
-## Exit criteria
-A change can move from review to target environment with explicit validation and approval gates.
+## Labs
+
+- PR validation
+- Plan artifact
+- Environment promotion
+- Pipeline Break/Fix
+
+## Pipeline
+
+```text
+Git
+ ↓
+fmt / validate / test
+ ↓
+plan
+ ↓
+review / approval
+ ↓
+apply
+ ↓
+Azure validation
+```
+
+## Learner requirement
+
+Do not treat CI logs as magic. Read the failed job, identify the failing layer and reproduce the relevant command locally before fixing the pipeline.

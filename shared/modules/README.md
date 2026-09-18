@@ -1,5 +1,7 @@
 # Shared Terraform Modules
 
-Planned enterprise boundaries: `foundry`, `project`, `model`, `storage`, `search`, `key-vault`, `identity`, `monitoring`.
+Enterprise labs progressively introduce reusable modules.
 
-Modules expose stable interfaces; environment-specific values remain outside module implementation.
+Planned boundaries: `foundry`, `project`, `model`, `storage`, `search`, `key-vault`, `identity`, `monitoring`.
+
+Modules expose stable interfaces while environment-specific values remain outside the module implementation.

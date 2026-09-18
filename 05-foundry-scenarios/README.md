@@ -1,10 +1,10 @@
 # Course 05 — Foundry AI Scenario Engineering
 
 ## Mission
-Translate AI requirements into deployable platform architectures.
+Translate enterprise AI requirements into deployable, testable platform architectures.
 
 ## Scenarios
-GenAI assistant, RAG, agents, document intelligence, vision, speech/language, translation, content safety, multimodal understanding and multi-service platform.
+GenAI assistant, RAG, agents, document intelligence, vision, speech/language, translation, content safety, multimodal understanding and multi-service AI platform.
 
-## Exit criteria
-For each scenario the learner can identify data flow, AI service boundary, identity boundary and validation evidence.
+## Engineering lens
+For each scenario identify data flow, service boundary, identity boundary, configuration inputs and validation evidence.

@@ -1,95 +1,240 @@
-# Lab 01-02 — Cli
+# Lab — Cli
 
-> 🟢 **Build Lab** · Beginner → Intermediate · 45–75 min
+> 🟢 Data2AI Academy — Learner Execution Guide
 
 ## Mission
-Build, validate, break, repair and clean up **Cli**. This is an executable workshop: create/edit files, run commands, inspect evidence, diagnose a controlled failure, then complete a challenge.
 
-## Prerequisites
+Build the **Cli** scenario as an engineer. You must create or edit the important files, execute the commands, read the outputs, validate the result, diagnose a controlled failure, repair it and complete the challenge.
+
+## 1. Prerequisites
+
+Verify the toolchain:
+
 ```powershell
 git --version
 az version
 terraform version
+```
+
+Authenticate and verify the Azure context when Azure is involved:
+
+```powershell
 az account show
+az account list --output table
 ```
-If needed: `az login`, then `az account set --subscription "<SUBSCRIPTION_ID>"`.
 
-## 1 — Enter the lab
+## 2. Workspace
+
+Clone the repository if needed:
+
 ```powershell
-cd data2ai-terraform-azure-foundry/01-azure-foundations/lab-01-02-cli
-Get-ChildItem -Force
+git clone https://github.com/msellamiTN/data2ai-terraform-azure-foundry.git
+cd data2ai-terraform-azure-foundry
 ```
-Do not open solution/ before the challenge.
 
-## 2 — Create your workspace
+Enter this lab and prove your location:
+
 ```powershell
-if (Test-Path starter) { Copy-Item starter student-work -Recurse -Force } else { New-Item student-work -ItemType Directory -Force | Out-Null }
+Get-Location
+```
+
+Create your own workspace when the lab requires implementation:
+
+```powershell
+New-Item -ItemType Directory -Name student-work -Force
 cd student-work
 code .
 ```
 
-## 3 — Create / edit files
-Create the lab input/configuration under student-work/. Keep IDs and names parameterized. Example:
+Do not use the reference solution as your starting point.
+
+## 3. BUILD — Create / edit the project
+
+Read the lab objective and inspect the starter material.
+
+Create the files requested by the scenario. For Terraform work, the normal construction sequence is:
+
 ```text
-AZURE_LOCATION=westeurope
-AZURE_RESOURCE_GROUP=rg-data2ai-01-02-lab
+main.tf
+ ↓
+provider / versions
+ ↓
+variables.tf
+ ↓
+terraform.tfvars
+ ↓
+resources / data / modules
+ ↓
+outputs.tf
+ ↓
+validation
 ```
 
-## 4 — Execute
-Execute the Azure CLI/Portal steps required by this lab. For Terraform files, run `terraform fmt`, `terraform init`, `terraform validate`, then `terraform plan`.
+Do not paste a complete solution. Enter the important blocks yourself and understand every argument.
 
-## 5 — Validate independently
+## 4. RUN — Execute commands
+
+For Terraform labs:
+
 ```powershell
-az account show --query "{subscription:id,tenant:tenantId}" --output table
-az group show --name rg-data2ai-01-02-lab --query "{name:name,location:location,tags:tags}" --output json
+terraform fmt
+terraform init
+terraform validate
+terraform plan
 ```
-Run validation/validate.ps1 from the lab root if present.
 
-## 6 — Evidence
-Record command, expected output, observed output, evidence location and PASS/FAIL in notes.md.
+Apply only after reading the plan:
 
-## 7 — BREAK / FIX 🔴
-Introduce one reversible failure: invalid region, wrong variable, missing permission, wrong identifier, missing tag or provider mismatch. Capture:
+```powershell
+terraform apply
+```
+
+For Azure labs, use the corresponding Azure CLI commands from the scenario and inspect the returned JSON/table output.
+
+## 5. READ THE OUTPUT
+
+After every important command, stop and answer:
+
+1. What did the command do?
+2. What did the output prove?
+3. What changed?
+4. What should I inspect next?
+
+For `terraform plan`, locate:
+
 ```text
-SYMPTOM:
-EVIDENCE:
-DIAGNOSIS:
-ROOT CAUSE:
-FIX:
-VALIDATION:
-PREVENTION:
+Plan: X to add, Y to change, Z to destroy.
 ```
-Repair, rerun and independently validate.
 
-## 8 — Challenge ⚫
-Without opening solution/, create a working variant that remains parameterized, respects security/tagging constraints, can be independently validated and can be reset safely. Capture the final validation evidence.
+Confirm that the resource addresses and counts match the mission before applying.
 
-## 9 — Reference solution
-Only after the challenge:
+## 6. VALIDATE
+
+Validate the result from an independent perspective.
+
+For Terraform/Azure labs inspect:
+
 ```powershell
-cd ..
-Get-ChildItem solution -Recurse
+terraform state list
+terraform state show <address>
+terraform output
+az resource list --output table
 ```
-Write down one meaningful difference between your implementation and the reference.
 
-## 10 — Cleanup
-Remove only resources created for this lab; never delete shared course resources.
+Compare:
 
-## Troubleshooting
-| Symptom | Evidence | Layer | First action |
-|---|---|---|---|
-| command not found | tool version | Toolchain | fix PATH |
-| login failure | az account show | Identity | re-authenticate |
-| authorization denied | error + scope | RBAC | inspect role/scope |
-| provider failure | terraform init | Provider | check version |
-| invalid location | Azure API error | Configuration | choose supported region |
-| unexpected plan | terraform plan | State/config | inspect inputs/state |
+```text
+Configuration ↔ Terraform State ↔ Azure
+```
 
-## Completion criteria
-- [ ] files created/edited
-- [ ] execution completed
-- [ ] independent validation passed
-- [ ] Break/Fix repaired
-- [ ] challenge completed
-- [ ] solution compared
-- [ ] cleanup completed
+For AI scenarios also validate the project/model/deployment/service contract required by the scenario.
+
+## 7. EVIDENCE CHECKPOINT
+
+Create evidence:
+
+```powershell
+New-Item -ItemType Directory -Name evidence -Force
+```
+
+Capture important commands, for example:
+
+```powershell
+terraform validate | Tee-Object evidence/03-validate.txt
+terraform plan | Tee-Object evidence/04-plan.txt
+terraform apply | Tee-Object evidence/05-apply.txt
+```
+
+Keep evidence showing both success and failure/recovery.
+
+## 8. BREAK/FIX
+
+Use the supplied `broken/` scenario when present.
+
+Deliberately reproduce the failure. Then use:
+
+```text
+SYMPTOM
+ ↓
+EVIDENCE
+ ↓
+DIAGNOSIS
+ ↓
+ROOT CAUSE
+ ↓
+FIX
+ ↓
+VALIDATION
+ ↓
+PREVENTION
+```
+
+First identify the failing layer:
+
+```text
+HCL → Terraform → Provider/API → Azure → Identity/RBAC → Network → Quota/Capacity
+```
+
+Do not jump directly to the reference answer.
+
+## 9. CHALLENGE
+
+Before opening `solution/`, implement the independent challenge.
+
+The challenge should be solved from requirements, not from a finished file.
+
+Demonstrate:
+
+- your own implementation;
+- expected plan or execution result;
+- independent validation;
+- evidence;
+- cleanup.
+
+## 10. SOLUTION
+
+Only after the challenge, inspect the reference implementation.
+
+Compare:
+
+- architecture;
+- file structure;
+- interfaces;
+- resource configuration;
+- validation;
+- security;
+- maintainability.
+
+The goal is to understand the engineering choices, not copy the answer.
+
+## 11. CLEANUP
+
+For temporary Azure infrastructure:
+
+```powershell
+terraform plan -destroy
+terraform destroy
+```
+
+Review destruction before confirming.
+
+## 12. Definition of Done
+
+- [ ] I created or edited the important files myself.
+- [ ] I executed the commands myself.
+- [ ] I read and interpreted the outputs.
+- [ ] I validated the result independently.
+- [ ] I completed Break/Fix.
+- [ ] I diagnosed the root cause.
+- [ ] I completed the challenge before opening the solution.
+- [ ] I captured evidence.
+- [ ] I cleaned up temporary resources.
+
+## Knowledge Check
+
+1. What was built?
+2. Which command gave the most useful evidence?
+3. What did that output prove?
+4. Which layer failed during Break/Fix?
+5. What was the root cause?
+6. How would you prevent the same failure in production?

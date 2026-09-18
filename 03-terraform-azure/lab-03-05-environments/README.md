@@ -1,11 +1,12 @@
-# Lab 03-05 — environments
+# Lab — Environments
 
-> 🟢 **Build Lab** · 45–75 min
+> 🟢 Data2AI Academy — Learner Execution Guide
 
 ## Mission
-Build, validate, break, repair and clean up this Azure/Terraform capability.
+Build this scenario as an engineer. Create or edit the important files, execute commands, read outputs, validate independently, diagnose a controlled failure, repair it and complete the challenge.
 
 ## 1. Prerequisites
+Verify Git, Azure CLI, Terraform and Azure authentication:
 ```powershell
 git --version
 az version
@@ -13,50 +14,90 @@ terraform version
 az account show
 ```
 
-## 2. Build
+## 2. Workspace
 ```powershell
-cd data2ai-terraform-azure-foundry/03-terraform-azure/lab-03-05-environments
-Copy-Item starter student-work -Recurse -Force
+git clone https://github.com/msellamiTN/data2ai-terraform-azure-foundry.git
+cd data2ai-terraform-azure-foundry
+Get-Location
+New-Item -ItemType Directory -Name student-work -Force
 cd student-work
 code .
 ```
-Create/edit the files in student-work. Keep inputs parameterized and never commit secrets.
 
-## 3. Execute
+## 3. BUILD — Create / edit
+Start from the starter material, not the solution. Create the files requested by the scenario. For Terraform, build progressively: provider/versions → variables → tfvars → resources/data/modules → outputs → validation.
+
+After each meaningful edit:
 ```powershell
-terraform fmt -recursive
+terraform fmt
+terraform validate
+```
+
+## 4. RUN — Execute and observe
+Run the commands required by the scenario. For Terraform:
+```powershell
 terraform init
 terraform validate
 terraform plan
+```
+Apply only after reading the plan:
+```powershell
 terraform apply
 ```
 
-## 4. Validate independently
+## 5. READ THE OUTPUT
+After each command answer:
+1. What did it do?
+2. What did the output prove?
+3. What changed?
+4. What should I inspect next?
+
+For the Terraform plan, locate the add/change/destroy counts and compare them with the mission.
+
+## 6. VALIDATE
+Use an independent view:
 ```powershell
-az account show --query "{subscription:id,tenant:tenantId}" --output table
-az group show --name rg-data2ai-03-05-lab --output json
-terraform output
 terraform state list
+terraform state show <address>
+terraform output
+az resource list --output table
 ```
+Compare configuration ↔ Terraform state ↔ Azure.
 
-## 5. Break / Fix 🔴
-Introduce one controlled failure. Document Symptom, Evidence, Diagnosis, Root Cause, Fix, Validation and Prevention. Repair and rerun the full validation sequence.
+## 7. EVIDENCE
+```powershell
+New-Item -ItemType Directory -Name evidence -Force
+terraform validate | Tee-Object evidence/03-validate.txt
+terraform plan | Tee-Object evidence/04-plan.txt
+```
+Capture apply, inspection and validation evidence too.
 
-## 6. Challenge ⚫
-Build a working variant without opening solution/. Preserve parameterization, security/tagging requirements and independent validation.
+## 8. BREAK/FIX
+Use the supplied broken scenario. Follow:
+```text
+Symptom → Evidence → Diagnosis → Root Cause → Fix → Validation → Prevention
+```
+First identify the failing layer: HCL → Terraform → Provider/API → Azure → Identity/RBAC → Network → Quota/Capacity.
 
-## 7. Reference solution
-After the challenge, inspect solution/ and record one meaningful design difference.
+## 9. CHALLENGE
+Complete the independent requirements before opening solution. Prove your implementation with commands, outputs, validation and evidence.
 
-## 8. Cleanup
+## 10. SOLUTION
+Only after the challenge, compare architecture, file structure, interfaces, validation, security and maintainability with the reference implementation.
+
+## 11. CLEANUP
 ```powershell
 terraform plan -destroy
 terraform destroy
 ```
+Review destruction before confirming.
 
-## Completion
-- [ ] build complete
-- [ ] validation passed
-- [ ] Break/Fix repaired
-- [ ] challenge complete
-- [ ] cleanup complete
+## Definition of Done
+- [ ] I created/edited the important files.
+- [ ] I executed the commands.
+- [ ] I interpreted the outputs.
+- [ ] I validated independently.
+- [ ] I completed Break/Fix.
+- [ ] I completed the challenge before opening the solution.
+- [ ] I captured evidence.
+- [ ] I cleaned up resources.

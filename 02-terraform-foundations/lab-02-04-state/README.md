@@ -1,28 +1,109 @@
-# lab-02-04-state — lab 02 04 state
+# Lab 02-04 — state
 
-> **Data2AI Academy — Professional Hands-on Lab**
+> 🟢 **Build Lab** · 45–75 min
 
 ## Mission
-Build this capability as repeatable Azure/Terraform engineering, validate it, break it deliberately, then recover it.
+Build **state** from a clean student workspace. You will create/edit files, execute commands, validate independently, break the configuration, fix it, complete a challenge, compare the solution and clean up.
 
-## Prerequisites
-Git, Azure CLI, Terraform, PowerShell/Bash and a non-production lab subscription.
+## 1. Prerequisites
+```powershell
+git --version
+az version
+terraform version
+az account show
+```
+If required: `az login` and `az account set --subscription "<SUBSCRIPTION_ID>"`.
 
-## Tasks
-1. Inspect starter inputs and expected behavior.
-2. Implement the smallest correct change.
-3. Run formatting and validation checks.
-4. Review the plan before applying.
-5. Validate with observable evidence.
+## 2. Enter the lab
+```powershell
+cd data2ai-terraform-azure-foundry/02-terraform-foundations/lab-02-04-state
+Get-ChildItem -Force
+```
+Do not inspect `solution/` before the challenge.
 
-## Break/Fix
-**Symptom → Evidence → Diagnosis → Root Cause → Fix → Validation → Prevention**.
+## 3. Create the student workspace
+```powershell
+Copy-Item starter student-work -Recurse -Force
+cd student-work
+code .
+```
 
-## Challenge
-Solve a meaningful variation independently and explain the design choice.
+## 4. Create / edit the files
+Create or complete `main.tf`, `variables.tf`, `outputs.tf` and `terraform.tfvars`. Use this baseline:
 
-## Cleanup
-Remove only lab resources and verify the target scope.
+```hcl
+terraform { required_version = ">= 1.6.0" required_providers { azurerm = { source = "hashicorp/azurerm", version = "~> 4.0" } } }
+provider "azurerm" { features {} }
+resource "azurerm_resource_group" "lab" { name = var.resource_group_name location = var.location tags = var.tags }
+```
 
-## Reference solution
-Consult after the challenge and compare engineering decisions.
+Parameterize values; never hard-code secrets.
+
+## 5. Execute step by step
+```powershell
+terraform fmt -recursive
+terraform init
+terraform validate
+terraform plan
+```
+Review the plan. If correct:
+```powershell
+terraform apply
+```
+
+## 6. Independent validation
+```powershell
+az account show --query "{subscription:id,tenant:tenantId}" --output table
+az group show --name rg-data2ai-02-04-lab --query "{name:name,location:location,tags:tags}" --output json
+```
+```powershell
+terraform output
+terraform state list
+```
+
+## 7. Break / Fix 🔴
+Introduce one deliberate failure: wrong variable, invalid region, missing permission, incorrect identifier or state/configuration mismatch. Capture:
+```text
+SYMPTOM:
+EVIDENCE:
+DIAGNOSIS:
+ROOT CAUSE:
+FIX:
+VALIDATION:
+PREVENTION:
+```
+Repair and repeat validation.
+
+## 8. Challenge ⚫
+Build a working variant without opening `solution/`. Keep inputs parameterized, preserve required tags/security constraints, prove the result independently and leave no secrets in Git.
+
+## 9. Reference solution
+After the challenge:
+```powershell
+cd ..
+Get-ChildItem solution -Recurse
+```
+Compare one design choice and explain its consequence.
+
+## 10. Cleanup
+```powershell
+terraform plan -destroy
+terraform destroy
+```
+
+## Troubleshooting
+| Symptom | Evidence | Layer | Action |
+|---|---|---|---|
+| Login failure | `az account show` | Identity | re-authenticate |
+| Access denied | error + scope | RBAC | inspect role/scope |
+| Init failure | `terraform init` | Provider | check version/network |
+| Bad plan | `terraform plan` | State/config | inspect inputs/state |
+
+## Completion
+- [ ] files created/edited
+- [ ] workflow executed
+- [ ] independent validation passed
+- [ ] Break/Fix repaired
+- [ ] challenge completed
+- [ ] solution compared
+- [ ] cleanup completed

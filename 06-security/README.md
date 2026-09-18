@@ -1,13 +1,37 @@
-# Course 06 — Secure AI Platform Engineering
+# COURSE 06 — Secure AI Platform Engineering
 
 ## Mission
-Secure the AI platform through identity, authorization, secrets and private networking.
 
-## Competencies
-Managed identity, RBAC, Key Vault, VNet, private endpoints and private DNS.
+Secure the AI platform using identity-first and network-aware engineering.
+
+## Labs
+
+- Managed Identity
+- RBAC
+- Key Vault
+- Private Networking
+- Security Break/Fix
 
 ## Diagnostic model
-**Identity → Role → Scope → Permission**.
 
-## Exit criteria
-The learner can demonstrate least-privilege access and recover from an authorization or connectivity failure.
+```text
+IDENTITY
+ ↓
+ROLE
+ ↓
+SCOPE
+ ↓
+PERMISSION
+ ↓
+NETWORK
+ ↓
+SERVICE
+```
+
+## Learner task
+
+Create the security configuration yourself, inspect role assignments and network dependencies, then prove access or failure with observable evidence.
+
+## Break/Fix
+
+Wrong identity, wrong role, wrong scope, Key Vault permissions, private endpoint and DNS failures.

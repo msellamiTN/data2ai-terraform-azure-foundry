@@ -1,4 +1,4 @@
-# lab-00-01-toolchain — toolchain
+# lab-01-03-rbac — rbac
 
 > **Data2AI Academy — Professional Hands-on Lab**
 

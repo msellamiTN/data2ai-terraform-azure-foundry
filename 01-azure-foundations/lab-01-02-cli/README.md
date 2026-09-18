@@ -1,4 +1,4 @@
-# lab-00-01-toolchain — toolchain
+# lab-01-02-cli — cli
 
 > **Data2AI Academy — Professional Hands-on Lab**
 

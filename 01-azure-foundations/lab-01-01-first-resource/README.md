@@ -1,4 +1,4 @@
-# lab-00-01-toolchain — toolchain
+# lab-01-01-first-resource — first resource
 
 > **Data2AI Academy — Professional Hands-on Lab**
 

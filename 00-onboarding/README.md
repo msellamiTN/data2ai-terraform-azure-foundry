@@ -1,16 +1,10 @@
 # Course 00 — Learner & Lab Environment Onboarding
 
 ## Mission
-Verify Git, Azure CLI, Terraform, PowerShell and authentication.
+Verify the complete local/cloud toolchain before infrastructure work.
 
-## Competency outcome
-A reproducible workstation and authenticated Azure context.
+## Competencies
+Git, Azure CLI, Terraform, PowerShell/Bash, VS Code, Azure authentication and safe credential handling.
 
-## Method
-**LEARN → BUILD → VALIDATE → BREAK → FIX → CHALLENGE → SOLUTION**
-
-## Professional standard
-Every deployment must be reproducible, validated, explainable and safe to clean up. Never commit credentials, tokens, private keys or real production secrets.
-
-## Labs
-See the lab directories in this course. Start with the README, inspect the starter state, then validate your own implementation before opening the reference solution.
+## Exit criteria
+The learner can verify versions, authenticate safely, identify the active Azure subscription and diagnose a basic workstation failure.

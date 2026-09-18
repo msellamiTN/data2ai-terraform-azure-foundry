@@ -1,4 +1,4 @@
-# lab-00-01-toolchain — toolchain
+# lab-02-02-variables-outputs — variables outputs
 
 > **Data2AI Academy — Professional Hands-on Lab**
 

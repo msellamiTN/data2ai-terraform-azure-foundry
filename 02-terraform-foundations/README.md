@@ -7,7 +7,7 @@ Move from imperative clicks to declarative, repeatable infrastructure.
 HCL, providers, resources, variables, outputs, dependencies, data sources, state, import and drift.
 
 ## Labs
-First resource, variables/outputs, data sources, state, import/drift.
+First resource, variables and outputs, data sources, state, import and drift.
 
 ## Exit criteria
-The learner can predict plan changes and explain the relationship between configuration, Azure and state.
+The learner can explain the relationship between configuration, plan, Azure resources and Terraform state.

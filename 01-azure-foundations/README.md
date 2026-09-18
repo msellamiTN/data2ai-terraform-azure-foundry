@@ -7,7 +7,7 @@ Understand the Azure control plane before automating it.
 Tenant, subscription, resource group, region, resource, Azure CLI, identity and RBAC.
 
 ## Labs
-First resource, CLI recreation, RBAC diagnosis.
+Provision a first resource, recreate it with CLI and diagnose authorization.
 
 ## Exit criteria
-The learner can inspect a resource and explain who can perform an operation, at what scope and why.
+The learner can locate a resource and explain **Identity → Role → Scope → Permission**.

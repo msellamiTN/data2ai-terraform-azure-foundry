@@ -12,10 +12,6 @@ variable "resource_group_name" {
   description = "Name of the Resource Group."
   type        = string
   nullable    = false
-  validation {
-    condition     = can(regex("^[a-zA-Z0-9._()-]{1,90}$", var.resource_group_name))
-    error_message = "resource_group_name contains unsupported characters or is too long."
-  }
 }
 
 variable "location" {

@@ -95,5 +95,5 @@ index_lines = [
     "",
 ]
 for lab, title, present, total in sorted(lab_pages, key=lambda x: x[0]):
-    index_lines.append(f"- [{title}]({{site.baseurl}}/Instructions/Exercises/{lab}.html) — {present}/{total} learning stages")
+    index_lines.append(f"- [{title}]({lab}.html) — {present}/{total} learning stages")
 (EXERCISES / "index.md").write_text("\n".join(index_lines) + "\n", encoding="utf-8")

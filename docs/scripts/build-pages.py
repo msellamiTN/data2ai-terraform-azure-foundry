@@ -29,7 +29,7 @@ def has_any(text, markers):
     return any(marker.lower() in text.lower() for marker in markers)
 
 def duration_from(text):
-    match = re.search(r"(?:Beginner|Intermediate|Advanced)[^\\n]*?([0-9]+\\s*[–-]\\s*[0-9]+\\s*min|[0-9]+\\s*h)", text, re.I)
+    match = re.search(r"(?:Beginner|Intermediate|Advanced)[^\n]*?([0-9]+\s*[–-]\s*[0-9]+\s*min|[0-9]+\s*h)", text, re.I)
     return match.group(1) if match else "Self-paced"
 
 def escape_yaml(value):
@@ -43,40 +43,40 @@ for readme in sorted(ROOT.glob("**/lab-*/README.md")):
         continue
     lab = rel.parent.name
     text = readme.read_text(encoding="utf-8")
-    match = re.search(r"^#\\s+(.+)$", text, re.M)
+    match = re.search(r"^#\s+(.+)$", text, re.M)
     title = match.group(1).strip() if match else lab
     stages = [name for name, markers in STAGES if has_any(text, markers)]
     maturity = f"{len(stages)}/{len(STAGES)}"
     duration = duration_from(text)
     stage_value = ",".join(stages)
-    body = re.sub(r"^#\\s+.+$\\n?", "", text, count=1, flags=re.M).lstrip()
+    body = re.sub(r"^#\s+.+$\n?", "", text, count=1, flags=re.M).lstrip()
     front_matter = (
-        "---\\n"
-        "layout: default\\n"
-        f'title: "{escape_yaml(title)}"\\n'
-        f'lab_id: "{lab}"\\n'
-        f'duration: "{duration}"\\n'
-        f'stages: "{stage_value}"\\n'
-        f'maturity: "{maturity}"\\n'
-        f'permalink: "/Instructions/Exercises/{lab}.html"\\n'
-        "---\\n\\n"
+        "---\n"
+        "layout: default\n"
+        f'title: "{escape_yaml(title)}"\n'
+        f'lab_id: "{lab}"\n'
+        f'duration: "{duration}"\n'
+        f'stages: "{stage_value}"\n'
+        f'maturity: "{maturity}"\n'
+        f'permalink: "/Instructions/Exercises/{lab}.html"\n'
+        "---\n\n"
     )
     wrapper = (
-        f"# {title}\\n\\n"
-        f"> **Lab:** {lab}  \\n"
-        f"> **Duration:** {duration}  \\n"
-        f"> **Learning loop:** LEARN → BUILD → VALIDATE → BREAK → FIX → CHALLENGE → SOLUTION → CLEANUP  \\n"
-        f"> **Lab maturity:** {maturity}\\n\\n"
-        "## Exercise workflow\\n\\n"
-        "| Stage | Status |\\n|---|---|\\n"
+        f"# {title}\n\n"
+        f"> **Lab:** {lab}  \n"
+        f"> **Duration:** {duration}  \n"
+        f"> **Learning loop:** LEARN → BUILD → VALIDATE → BREAK → FIX → CHALLENGE → SOLUTION → CLEANUP  \n"
+        f"> **Lab maturity:** {maturity}\n\n"
+        "## Exercise workflow\n\n"
+        "| Stage | Status |\n|---|---|\n"
     )
     for stage, _ in STAGES:
         status = "✅ present" if stage in stages else "🧩 to be completed"
-        wrapper += f"| **{stage}** | {status} |\\n"
+        wrapper += f"| **{stage}** | {status} |\n"
     wrapper += (
-        "\\n> **Important:** This GitHub Pages view is generated dynamically from the lab README. "
-        "The repository README remains the source of truth.\\n\\n"
-        f"> **Source:** {rel}\\n\\n"
+        "\n> **Important:** This GitHub Pages view is generated dynamically from the lab README. "
+        "The repository README remains the source of truth.\n\n"
+        f"> **Source:** {rel}\n\n"
     )
     page = front_matter + wrapper + body
     (EXERCISES / f"{lab}.md").write_text(page, encoding="utf-8")
@@ -96,4 +96,4 @@ index_lines = [
 ]
 for lab, title, present, total in sorted(lab_pages, key=lambda x: x[0]):
     index_lines.append(f"- [{title}]({{site.baseurl}}/Instructions/Exercises/{lab}.html) — {present}/{total} learning stages")
-(EXERCISES / "index.md").write_text("\\n".join(index_lines) + "\\n", encoding="utf-8")
+(EXERCISES / "index.md").write_text("\n".join(index_lines) + "\n", encoding="utf-8")

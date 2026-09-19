@@ -1,7 +1,7 @@
 from pathlib import Path
 import re, shutil
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "_site_source"
 EXERCISES = OUT / "Instructions" / "Exercises"
 

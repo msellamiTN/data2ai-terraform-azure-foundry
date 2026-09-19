@@ -92,3 +92,17 @@ A lab is complete when the learner can:
 The Markdown `README.md` inside each lab remains the authoring source. GitHub Pages is generated dynamically from those lab guides on every relevant push to `main`.
 
 > **Repository:** [Data2AI Terraform + Azure AI Foundry](https://github.com/msellamiTN/data2ai-terraform-azure-foundry)
+
+
+## Data2AI Academy identity
+
+> **Data2AI** — *Unlock the power of your data with Data2AI*  
+> **Decision Driven.**
+
+The Academy applies the same Data2AI engineering philosophy throughout the learning experience: practical architecture, measurable evidence, automation, troubleshooting, and decision-driven delivery.
+
+### Our maker mindset
+
+**Read less. Build more. Break it. Fix it. Explain it. Automate it.**
+
+The objective is not command memorization. The objective is to develop the ability to engineer reliable AI infrastructure from a business requirement through implementation, validation, troubleshooting, security, observability, and automation.

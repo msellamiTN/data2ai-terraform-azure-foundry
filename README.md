@@ -62,3 +62,25 @@ CLEANUP
 ```
 
 Start with [Learner Guide](./learner-guide.md).
+
+## Academy operating system
+
+- [Learner Guide](./learner/learner-guide.md)
+- [Instructor Guide](./instructor/instructor-guide.md)
+- [Lab Delivery Guide](./instructor/lab-delivery-guide.md)
+- [Lab Rubric](./instructor/grading-rubrics/lab-rubric.md)
+- [Common Failures](./instructor/troubleshooting/common-failures.md)
+- [Academy Release Standard](./docs/academy-release-standard.md)
+- [Lab Template](./docs/templates/lab-template.md)
+
+## GitHub Pages
+
+The learner-facing site is generated dynamically from the lab `README.md` files. The repository remains the source of truth; Pages is the execution-oriented presentation layer.
+
+**LEARN → BUILD → VALIDATE → BREAK → FIX → CHALLENGE → SOLUTION → CLEANUP**
+
+The Pages pipeline generates Microsoft Learning-style exercise pages, validates the generated page contract, builds Jekyll, and deploys through GitHub Pages.
+
+## Readiness policy
+
+A lab is not **READY** because Terraform syntax passes. READY requires executable implementation, real validation, controlled Break/Fix, independent Challenge, complete Solution, cleanup, and the learner/instructor contract. See the [Academy Release Standard](./docs/academy-release-standard.md).

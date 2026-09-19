@@ -1,32 +1,28 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{{ page.title }} · Data2AI Academy</title>
 <style>
-:root{--text:#24292f;--muted:#57606a;--border:#d0d7de;--accent:#0969da;--code:#f6f8fa}
+:root{--text:#24292f;--muted:#57606a;--border:#d0d7de;--accent:#0969da;--surface:#f6f8fa;--success:#1a7f37;--warning:#9a6700;--dark:#24292f}
 *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);line-height:1.6}
-header{background:#24292f;color:white;padding:16px 28px;position:sticky;top:0;z-index:10}header a{color:white;text-decoration:none;font-weight:700}
+header{background:var(--dark);color:#fff;padding:15px 28px;position:sticky;top:0;z-index:10;box-shadow:0 1px 4px #0003}
+header .brand{max-width:1280px;margin:auto;display:flex;align-items:center;justify-content:space-between}header a{color:#fff;text-decoration:none;font-weight:700}header small{font-weight:400;opacity:.8}
 .layout{display:grid;grid-template-columns:280px minmax(0,900px);gap:36px;max-width:1280px;margin:auto;padding:28px}
 aside{position:sticky;top:84px;height:calc(100vh - 110px);overflow:auto;border-right:1px solid var(--border);padding-right:20px}
 aside a{display:block;padding:5px 8px;color:var(--text);text-decoration:none;border-radius:6px;font-size:14px}aside a:hover{background:#eaeef2;color:var(--accent)}
+aside .section{margin-top:16px;font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
 main{min-width:0}h1{font-size:34px;line-height:1.2;border-bottom:1px solid var(--border);padding-bottom:14px}h2{margin-top:34px;border-bottom:1px solid var(--border);padding-bottom:6px}
-blockquote{border-left:4px solid var(--accent);padding:8px 16px;background:#f6f8fa;color:var(--muted)}code{background:var(--code);padding:2px 5px;border-radius:4px}pre{background:#0d1117;color:#e6edf3;padding:16px;overflow:auto;border-radius:8px}pre code{background:transparent;padding:0}
-table{border-collapse:collapse;width:100%}th,td{border:1px solid var(--border);padding:8px}th{background:#f6f8fa}
-@media(max-width:900px){.layout{display:block;padding:16px}aside{position:static;height:auto;border-right:0;border-bottom:1px solid var(--border);padding:0 0 14px;margin-bottom:20px}}
-</style>
-</head>
-<body>
-<header><a href="{{ '/' | relative_url }}">Data2AI Academy</a></header>
-<div class="layout">
-<aside>
-<strong>LAB NAVIGATION</strong>
-<a href="{{ '/' | relative_url }}">Academy Home</a>
-{% assign labs = site.pages | where_exp: "p", "p.path contains 'Instructions/Exercises/'" | sort: "title" %}
-{% for lab in labs %}<a href="{{ lab.url | relative_url }}">{{ lab.title }}</a>{% endfor %}
-</aside>
-<main>{{ content }}</main>
-</div>
-</body>
-</html>
+blockquote{border-left:4px solid var(--accent);padding:8px 16px;background:var(--surface);color:var(--muted)}code{background:var(--surface);padding:2px 5px;border-radius:4px}
+pre{background:#0d1117;color:#e6edf3;padding:16px;overflow:auto;border-radius:8px}pre code{background:transparent;padding:0}
+table{border-collapse:collapse;width:100%;margin:14px 0}th,td{border:1px solid var(--border);padding:8px;text-align:left}th{background:var(--surface)}
+.lab-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:18px 0}.meta-card{border:1px solid var(--border);border-radius:8px;padding:10px;background:#fff}.meta-card small{display:block;color:var(--muted);font-size:12px;text-transform:uppercase}.meta-card strong{display:block;margin-top:2px}
+.stage-strip{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 22px}.stage{padding:4px 9px;border:1px solid var(--border);border-radius:999px;font-size:12px;font-weight:600;background:var(--surface)}.stage.present{border-color:#a6d8b5;color:var(--success);background:#f0fff4}.stage.missing{color:var(--warning);background:#fff8e6}
+@media(max-width:900px){.layout{display:block;padding:16px}aside{position:static;height:auto;border-right:0;border-bottom:1px solid var(--border);padding:0 0 14px;margin-bottom:20px}.lab-meta{grid-template-columns:1fr}}
+</style></head><body>
+<header><div class="brand"><a href="{{ '/' | relative_url }}">Data2AI Academy</a><small>Terraform + Azure AI Foundry · Build-first learning</small></div></header>
+<div class="layout"><aside><strong>LAB NAVIGATION</strong><a href="{{ '/' | relative_url }}">Academy Home</a><a href="{{ '/Instructions/Exercises/' | relative_url }}">All Exercises</a>
+{% assign labs = site.pages | where_exp: "p", "p.path contains 'Instructions/Exercises/lab-'" | sort: "lab_id" %}{% assign current_course = "" %}
+{% for lab in labs %}{% assign course = lab.lab_id | slice: 4, 2 %}{% if course != current_course %}<div class="section">Course {{ course }}</div>{% assign current_course = course %}{% endif %}<a href="{{ lab.url | relative_url }}">{{ lab.lab_id }} — {{ lab.title }}</a>{% endfor %}
+</aside><main>
+{% if page.lab_id %}<div class="lab-meta"><div class="meta-card"><small>Lab</small><strong>{{ page.lab_id }}</strong></div><div class="meta-card"><small>Duration</small><strong>{{ page.duration }}</strong></div><div class="meta-card"><small>Maturity</small><strong>{{ page.maturity }}</strong></div></div>
+<div class="stage-strip">{% assign stages = "LEARN,BUILD,VALIDATE,BREAK,FIX,CHALLENGE,SOLUTION,CLEANUP" | split: "," %}{% for stage in stages %}{% if page.stages contains stage %}<span class="stage present">✓ {{ stage }}</span>{% else %}<span class="stage missing">○ {{ stage }}</span>{% endif %}{% endfor %}</div>{% endif %}
+{{ content }}</main></div></body></html>

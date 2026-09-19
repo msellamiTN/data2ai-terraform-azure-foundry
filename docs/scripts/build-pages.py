@@ -9,6 +9,9 @@ if OUT.exists():
     shutil.rmtree(OUT)
 EXERCISES.mkdir(parents=True)
 
+shutil.copy2(ROOT / "_config.yml", OUT / "_config.yml")
+shutil.copytree(ROOT / "_layouts", OUT / "_layouts")
+
 for readme in sorted(ROOT.glob("**/lab-*/README.md")):
     rel = readme.relative_to(ROOT)
     if any(part.startswith(".") for part in rel.parts):

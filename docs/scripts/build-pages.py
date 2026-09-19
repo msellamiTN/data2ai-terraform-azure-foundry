@@ -33,7 +33,7 @@ def duration_from(text):
     return match.group(1) if match else "Self-paced"
 
 def escape_yaml(value):
-    return value.replace('\\\\', '\\\\\\\\').replace(chr(34), '\\\\"')
+    return value.replace(chr(34), chr(92) + chr(34))
 
 lab_pages = []
 
@@ -48,6 +48,7 @@ for readme in sorted(ROOT.glob("**/lab-*/README.md")):
     stages = [name for name, markers in STAGES if has_any(text, markers)]
     maturity = f"{len(stages)}/{len(STAGES)}"
     duration = duration_from(text)
+    stage_value = ",".join(stages)
     body = re.sub(r"^#\\s+.+$\\n?", "", text, count=1, flags=re.M).lstrip()
     front_matter = (
         "---\\n"
@@ -55,7 +56,7 @@ for readme in sorted(ROOT.glob("**/lab-*/README.md")):
         f'title: "{escape_yaml(title)}"\\n'
         f'lab_id: "{lab}"\\n'
         f'duration: "{duration}"\\n'
-        f'stages: "{",".join(stages)}"\\n'
+        f'stages: "{stage_value}"\\n'
         f'maturity: "{maturity}"\\n'
         f'permalink: "/Instructions/Exercises/{lab}.html"\\n'
         "---\\n\\n"

@@ -17,19 +17,9 @@ for readme in sorted(ROOT.glob("**/lab-*/README.md")):
     text = readme.read_text(encoding="utf-8")
     match = re.search(r"^#\s+(.+)$", text, re.M)
     title = match.group(1).strip() if match else lab
+    safe_title = title.replace('"', '\\\"')
     body = re.sub(r"^#\s+.+$\n?", "", text, count=1, flags=re.M).lstrip()
-    page = f"""---
-layout: default
-title: "{title.replace('"', '\\\"')}"
----
-
-# {title}
-
-> **Lab:** `{lab}`  
-> **Source:** `{rel}`
-
-{body}
-"""
-    (EXERCISES / f"{lab}.md").write_text(page, encoding="utf-8")
+    page = "---\nlayout: default\ntitle: \"" + safe_title + "\"\n---\n\n# " + title + "\n\n> **Lab:** `" + lab + "`  \n> **Source:** `" + str(rel) + "`\n\n" + body
+    (EXERCISES / (lab + ".md")).write_text(page, encoding="utf-8")
 
 shutil.copy2(ROOT / "docs/index.md", OUT / "index.md")

@@ -1,0 +1,4 @@
+# Copy to terraform.tfvars for the Break/Fix exercise.
+subscription_id = "not-a-guid"
+resource_group_name = "rg-data2ai-invalid"
+location = "westeurope"

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ page.title }} · Data2AI Academy</title>
+<style>
+:root{--text:#24292f;--muted:#57606a;--border:#d0d7de;--accent:#0969da;--code:#f6f8fa}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);line-height:1.6}
+header{background:#24292f;color:white;padding:16px 28px;position:sticky;top:0;z-index:10}header a{color:white;text-decoration:none;font-weight:700}
+.layout{display:grid;grid-template-columns:280px minmax(0,900px);gap:36px;max-width:1280px;margin:auto;padding:28px}
+aside{position:sticky;top:84px;height:calc(100vh - 110px);overflow:auto;border-right:1px solid var(--border);padding-right:20px}
+aside a{display:block;padding:5px 8px;color:var(--text);text-decoration:none;border-radius:6px;font-size:14px}aside a:hover{background:#eaeef2;color:var(--accent)}
+main{min-width:0}h1{font-size:34px;line-height:1.2;border-bottom:1px solid var(--border);padding-bottom:14px}h2{margin-top:34px;border-bottom:1px solid var(--border);padding-bottom:6px}
+blockquote{border-left:4px solid var(--accent);padding:8px 16px;background:#f6f8fa;color:var(--muted)}code{background:var(--code);padding:2px 5px;border-radius:4px}pre{background:#0d1117;color:#e6edf3;padding:16px;overflow:auto;border-radius:8px}pre code{background:transparent;padding:0}
+table{border-collapse:collapse;width:100%}th,td{border:1px solid var(--border);padding:8px}th{background:#f6f8fa}
+@media(max-width:900px){.layout{display:block;padding:16px}aside{position:static;height:auto;border-right:0;border-bottom:1px solid var(--border);padding:0 0 14px;margin-bottom:20px}}
+</style>
+</head>
+<body>
+<header><a href="{{ '/' | relative_url }}">Data2AI Academy</a></header>
+<div class="layout">
+<aside>
+<strong>LAB NAVIGATION</strong>
+<a href="{{ '/' | relative_url }}">Academy Home</a>
+{% assign labs = site.pages | where_exp: "p", "p.path contains 'Instructions/Exercises/'" | sort: "title" %}
+{% for lab in labs %}<a href="{{ lab.url | relative_url }}">{{ lab.title }}</a>{% endfor %}
+</aside>
+<main>{{ content }}</main>
+</div>
+</body>
+</html>

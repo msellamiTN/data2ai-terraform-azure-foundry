@@ -1,0 +1,4 @@
+subscription_id      = "00000000-0000-0000-0000-000000000000"
+resource_group_name  = "rg-data2ai-tf-l02-04"
+storage_account_name = "stdata2aitf0204abc"
+location             = "westeurope"

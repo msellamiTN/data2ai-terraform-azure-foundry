@@ -1,10 +1,9 @@
-$ErrorActionPreference = "Continue"
-
 param(
     [string]$RepositoryRoot = (Get-Location).Path,
     [switch]$StopOnError
 )
 
+$ErrorActionPreference = "Continue"
 $results = @()
 $terraformDirs = Get-ChildItem -Path $RepositoryRoot -Recurse -Filter "*.tf" -File |
     Where-Object { $_.FullName -notmatch "\\.terraform\\" } |

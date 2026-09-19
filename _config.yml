@@ -1,0 +1,7 @@
+title: "Data2AI Academy — Terraform + Azure AI Foundry"
+description: "Build-first, self-paced engineering labs"
+theme: null
+markdown: kramdown
+permalink: /:path/:basename.html
+exclude:
+  - scripts/

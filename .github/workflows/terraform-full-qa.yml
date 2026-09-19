@@ -1,0 +1,74 @@
+name: Terraform Full QA
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  terraform-full-qa:
+    name: Validate every Terraform configuration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+
+      - name: Discover Terraform configurations
+        id: discover
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t dirs < <(find . -type f -name '*.tf' -not -path '*/.terraform/*' -printf '%h\n' | sort -u)
+          if [ "${#dirs[@]}" -eq 0 ]; then
+            echo "No Terraform files found."
+            exit 1
+          fi
+          printf '%s\n' "${dirs[@]}" | tee terraform-directories.txt
+          echo "Discovered ${#dirs[@]} Terraform directories."
+
+      - name: Format every Terraform configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+          failed=0
+          while IFS= read -r dir; do
+            echo "::group::fmt $dir"
+            terraform fmt -check -recursive "$dir" || failed=1
+            echo "::endgroup::"
+          done < terraform-directories.txt
+          exit "$failed"
+
+      - name: Init and validate every Terraform configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+          failed=0
+          while IFS= read -r dir; do
+            echo "::group::validate $dir"
+            if ! terraform -chdir="$dir" init -backend=false -input=false -no-color; then
+              echo "::error title=Terraform init failed::$dir"
+              failed=1
+            elif ! terraform -chdir="$dir" validate -no-color; then
+              echo "::error title=Terraform validate failed::$dir"
+              failed=1
+            else
+              echo "PASS: $dir"
+            fi
+            echo "::endgroup::"
+          done < terraform-directories.txt
+          exit "$failed"
+
+      - name: Upload QA inventory
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: terraform-full-qa-inventory
+          path: terraform-directories.txt

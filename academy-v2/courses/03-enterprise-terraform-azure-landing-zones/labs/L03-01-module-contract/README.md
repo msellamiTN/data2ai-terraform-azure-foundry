@@ -1,24 +1,48 @@
-# L03-01 — Module Contract
+# L03-01-module-contract
 
-## Scenario
-A platform team must expose a reusable Azure resource-group contract to workload teams.
+## Business Scenario
+Enterprise engineering scenario.
 
 ## Mission
-Create a Terraform module with explicit inputs, validation, outputs, tags and a deterministic contract.
+Implement the capability and produce evidence.
 
-## Acceptance criteria
-- module has variables and validation;
-- required tags are enforced;
-- resource group name is deterministic;
-- outputs expose the resource identity;
-- terraform fmt and validate pass;
-- validation script returns RESULT: READY.
+## Requirements
+Follow course requirements and least privilege.
+
+## Architecture
+Document the intended architecture before implementation.
+
+## Threat Model
+Identify trust boundaries and failure modes.
+
+## Prerequisites
+Use the academy environment.
+
+## Starter Environment
+Use supplied starter assets.
+
+## Guided Tasks
+Execute incrementally and capture evidence.
+
+## Validation
+Run validation and record output.
 
 ## Break/Fix
-The instructor changes one required input or tag contract. Diagnose the plan/validation failure before fixing it.
+Capture baseline evidence before injecting failure.
 
 ## Challenge
-Extend the module for environment and learner isolation without copying the module.
+Solve from requirements without procedural assistance.
 
-## Evidence
-Capture fmt, validate, plan and Azure verification output.
+## Reference Solution
+Compare only after the challenge.
+
+## Cleanup
+Remove lab resources and verify state.
+
+## Evidence checklist
+- [ ] Architecture
+- [ ] Build
+- [ ] Validation
+- [ ] Break/Fix
+- [ ] Challenge
+- [ ] Cleanup

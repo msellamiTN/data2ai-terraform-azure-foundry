@@ -3,10 +3,24 @@ name: Terraform Full QA
 on:
   push:
     branches: [main]
+    paths:
+      - "**/*.tf"
+      - "**/*.tfvars.example"
+      - ".github/workflows/terraform-full-qa.yml"
   pull_request:
+    paths:
+      - "**/*.tf"
+      - "**/*.tfvars.example"
+      - ".github/workflows/terraform-full-qa.yml"
+  workflow_dispatch:
 
 permissions:
   contents: read
+
+# Terraform QA is deterministic and can be superseded by a newer commit.
+concurrency:
+  group: terraform-full-qa
+  cancel-in-progress: true
 
 jobs:
   terraform-full-qa:
@@ -22,13 +36,12 @@ jobs:
           terraform_wrapper: false
 
       - name: Discover Terraform configurations
-        id: discover
         shell: bash
         run: |
           set -euo pipefail
           mapfile -t dirs < <(find . -type f -name '*.tf' -not -path '*/.terraform/*' -printf '%h\n' | sort -u)
           if [ "${#dirs[@]}" -eq 0 ]; then
-            echo "No Terraform files found."
+            echo "::error::No Terraform configuration found."
             exit 1
           fi
           printf '%s\n' "${dirs[@]}" | tee terraform-directories.txt

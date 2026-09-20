@@ -1,0 +1,3 @@
+# Executable Terraform scenario for L03-05-promotion-challenge
+resource "azurerm_cognitive_account" "ai" { name=replace("L03-05-promotion-challengeai","-","") location=var.location resource_group_name=azurerm_resource_group.this.name kind="AIServices" sku_name="S0" custom_subdomain_name=replace("L03-05-promotion-challengeai","-","") identity { type="SystemAssigned" } tags=local.tags }
+resource "azurerm_storage_account" "knowledge" { name=replace("L03-05-promotion-challengest","-","") resource_group_name=azurerm_resource_group.this.name location=var.location account_tier="Standard" account_replication_type="LRS" min_tls_version="TLS1_2" tags=local.tags }

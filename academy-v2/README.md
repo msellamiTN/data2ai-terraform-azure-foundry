@@ -27,3 +27,9 @@ BUSINESS SCENARIO → REQUIREMENTS → ARCHITECTURE → THREAT MODEL → ADR →
 | 10 | Enterprise Agentic AI Platform Capstone | Production simulation and defense |
 
 Every course has Build, Validate, Break/Fix and Challenge dimensions.
+
+## Scenario Factory
+
+Scenarios are a transverse dimension of the academy. The reusable Scenario Factory, maturity ladder, Scenario × Course matrix and failure-injection catalog are documented under [`academy-v2/scenarios/`](scenarios/).
+
+Learning unit: **COURSE × SCENARIO × CAPABILITY × FAILURE MODE × EVIDENCE**.

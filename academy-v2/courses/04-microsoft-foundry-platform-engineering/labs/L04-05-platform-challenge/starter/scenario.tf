@@ -1,0 +1,3 @@
+# Agentic AI platform Terraform baseline for L04-05-platform-challenge
+resource "azurerm_cognitive_account" "ai" { name=replace("L04-05-platform-challengeai","-","") location=var.location resource_group_name=azurerm_resource_group.this.name kind="AIServices" sku_name="S0" custom_subdomain_name=replace("L04-05-platform-challengeai","-","") identity { type="SystemAssigned" } tags=local.tags }
+resource "azurerm_storage_account" "knowledge" { name=replace("L04-05-platform-challengest","-","") resource_group_name=azurerm_resource_group.this.name location=var.location account_tier="Standard" account_replication_type="LRS" min_tls_version="TLS1_2" tags=local.tags }

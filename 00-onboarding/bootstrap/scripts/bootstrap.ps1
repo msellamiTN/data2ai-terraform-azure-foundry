@@ -1,0 +1,1 @@
+Write-Host 'DATA2AI Academy bootstrap placeholder — implement environment-specific deployment.'

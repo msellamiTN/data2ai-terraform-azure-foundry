@@ -84,3 +84,12 @@ The Pages pipeline generates Microsoft Learning-style exercise pages, validates 
 ## Readiness policy
 
 A lab is not **READY** because Terraform syntax passes. READY requires executable implementation, real validation, controlled Break/Fix, independent Challenge, complete Solution, cleanup, and the learner/instructor contract. See the [Academy Release Standard](./docs/academy-release-standard.md).
+
+
+## NEW — Elite Enterprise AI Platform Track
+
+The redesigned enterprise curriculum is now available under [academy-v2](./academy-v2/).
+
+**Terraform → Azure Landing Zones → Microsoft Foundry → Agentic AI → Security → Platform as Code → DevSecOps → SRE/FinOps → Capstone**
+
+See the new curriculum at [academy-v2/README.md](./academy-v2/README.md) and the [Enterprise AI Platform reference architecture](./academy-v2/architecture/enterprise-ai-platform.md).

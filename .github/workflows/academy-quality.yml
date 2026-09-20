@@ -55,4 +55,4 @@ jobs:
           find _site_source/Instructions/Exercises -maxdepth 1 -name '*.md' -not -name 'index.md' | grep -q .
 
       - name: Quality loop result
-        run: echo "RESULT: QUALITY LOOP PASS"
+        run: 'echo "RESULT: QUALITY LOOP PASS"'

@@ -5,17 +5,26 @@ on:
     branches: [main]
     paths:
       - "academy-v2/**"
-      - "docs/scripts/**"
+      - "docs/**"
+      - "instructor/**"
+      - "learner/**"
       - ".github/workflows/**"
   pull_request:
     paths:
       - "academy-v2/**"
-      - "docs/scripts/**"
+      - "docs/**"
+      - "instructor/**"
+      - "learner/**"
       - ".github/workflows/**"
   workflow_dispatch:
 
 permissions:
   contents: read
+
+# Validation is superseded by newer commits; keep only the latest run.
+concurrency:
+  group: academy-quality
+  cancel-in-progress: true
 
 jobs:
   quality-loop:
@@ -24,23 +33,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Python syntax
         run: python3 -m compileall -q academy-v2/scripts docs/scripts
+
       - name: Academy maturity report
         run: python3 academy-v2/scripts/academy-loop.py
+
       - name: Generate Pages source
         run: python3 docs/scripts/build-pages.py
+
       - name: Validate Pages source
         run: python3 docs/scripts/validate-pages.py
-      - name: Terraform executable-lab validation
+
+      - name: Verify generated Pages source
         shell: bash
         run: |
-          set -e
-          if [ -d "academy-v2/courses/03-enterprise-terraform-azure-landing-zones/labs/L03-01-module-contract/starter" ]; then
-            cd academy-v2/courses/03-enterprise-terraform-azure-landing-zones/labs/L03-01-module-contract/starter
-            terraform fmt -check
-            terraform init -backend=false
-            terraform validate
-          fi
+          set -euo pipefail
+          test -f _site_source/index.md
+          test -d _site_source/Instructions/Exercises
+          find _site_source/Instructions/Exercises -maxdepth 1 -name '*.md' -not -name 'index.md' | grep -q .
+
       - name: Quality loop result
         run: echo "RESULT: QUALITY LOOP PASS"

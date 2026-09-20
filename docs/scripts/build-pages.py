@@ -35,12 +35,25 @@ def duration_from(text):
 def escape_yaml(value):
     return value.replace(chr(34), chr(92) + chr(34))
 
+def discover_labs():
+    patterns = [
+        ROOT.glob("**/labs/*/README.md"),
+        ROOT.glob("**/lab-*/README.md"),
+    ]
+    seen = set()
+    for group in patterns:
+        for readme in group:
+            if any(part.startswith(".") for part in readme.relative_to(ROOT).parts):
+                continue
+            if readme in seen:
+                continue
+            seen.add(readme)
+            yield readme
+
 lab_pages = []
 
-for readme in sorted(ROOT.glob("**/lab-*/README.md")):
+for readme in sorted(discover_labs()):
     rel = readme.relative_to(ROOT)
-    if any(part.startswith(".") for part in rel.parts):
-        continue
     lab = rel.parent.name
     text = readme.read_text(encoding="utf-8")
     match = re.search(r"^#\s+(.+)$", text, re.M)
@@ -78,22 +91,17 @@ for readme in sorted(ROOT.glob("**/lab-*/README.md")):
         "The repository README remains the source of truth.\n\n"
         f"> **Source:** {rel}\n\n"
     )
-    page = front_matter + wrapper + body
-    (EXERCISES / f"{lab}.md").write_text(page, encoding="utf-8")
+    (EXERCISES / f"{lab}.md").write_text(front_matter + wrapper + body, encoding="utf-8")
     lab_pages.append((lab, title, len(stages), len(STAGES)))
 
 index_lines = [
-    "---",
-    "layout: default",
-    "title: Exercises",
-    "permalink: /Instructions/Exercises/",
-    "---",
-    "",
-    "# Exercises",
-    "",
-    "> Every exercise is generated from its repository README and published automatically.",
-    "",
+    "---", "layout: default", "title: Exercises",
+    "permalink: /Instructions/Exercises/", "---", "",
+    "# Exercises", "",
+    "> Every exercise is generated from its repository README and published automatically.", "",
 ]
 for lab, title, present, total in sorted(lab_pages, key=lambda x: x[0]):
     index_lines.append(f"- [{title}]({lab}.html) — {present}/{total} learning stages")
 (EXERCISES / "index.md").write_text("\n".join(index_lines) + "\n", encoding="utf-8")
+
+print(f"Generated {len(lab_pages)} exercise page(s).")

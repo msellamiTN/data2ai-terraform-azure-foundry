@@ -14,6 +14,7 @@ on:
 permissions:
   contents: read
 
+# Data2AI canonical Pages workflow — legacy duplicate workflow removed.
 # Pages deployments must not cancel an already-running deployment.
 # A new push waits for the previous Pages deployment instead.
 concurrency:

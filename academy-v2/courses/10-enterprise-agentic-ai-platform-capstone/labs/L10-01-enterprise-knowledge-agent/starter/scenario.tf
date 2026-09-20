@@ -1,0 +1,3 @@
+# Operations/capstone Terraform for L10-01-enterprise-knowledge-agent
+resource "azurerm_cognitive_account" "ai" { name=replace("L10-01-enterprise-knowledge-agentai","-","") location=var.location resource_group_name=azurerm_resource_group.this.name kind="AIServices" sku_name="S0" custom_subdomain_name=replace("L10-01-enterprise-knowledge-agentai","-","") identity { type="SystemAssigned" } tags=local.tags }
+resource "azurerm_storage_account" "knowledge" { name=replace("L10-01-enterprise-knowledge-agentst","-","") resource_group_name=azurerm_resource_group.this.name location=var.location account_tier="Standard" account_replication_type="LRS" min_tls_version="TLS1_2" tags=local.tags }

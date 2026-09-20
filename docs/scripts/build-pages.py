@@ -9,7 +9,6 @@ EXERCISES = OUT / "Instructions" / "Exercises"
 if OUT.exists():
     shutil.rmtree(OUT)
 EXERCISES.mkdir(parents=True)
-
 shutil.copy2(ROOT / "_config.yml", OUT / "_config.yml")
 shutil.copytree(ROOT / "_layouts", OUT / "_layouts")
 shutil.copy2(ROOT / "docs/index.md", OUT / "index.md")
@@ -36,22 +35,16 @@ def escape_yaml(value):
     return value.replace(chr(34), chr(92) + chr(34))
 
 def discover_labs():
-    patterns = [
-        ROOT.glob("**/labs/*/README.md"),
-        ROOT.glob("**/lab-*/README.md"),
-    ]
     seen = set()
-    for group in patterns:
-        for readme in group:
+    for pattern in ("**/labs/*/README.md", "**/lab-*/README.md"):
+        for readme in ROOT.glob(pattern):
             if any(part.startswith(".") for part in readme.relative_to(ROOT).parts):
                 continue
-            if readme in seen:
-                continue
-            seen.add(readme)
-            yield readme
+            if readme not in seen:
+                seen.add(readme)
+                yield readme
 
 lab_pages = []
-
 for readme in sorted(discover_labs()):
     rel = readme.relative_to(ROOT)
     lab = rel.parent.name
@@ -59,49 +52,39 @@ for readme in sorted(discover_labs()):
     match = re.search(r"^#\s+(.+)$", text, re.M)
     title = match.group(1).strip() if match else lab
     stages = [name for name, markers in STAGES if has_any(text, markers)]
-    maturity = f"{len(stages)}/{len(STAGES)}"
     duration = duration_from(text)
-    stage_value = ",".join(stages)
     body = re.sub(r"^#\s+.+$\n?", "", text, count=1, flags=re.M).lstrip()
     front_matter = (
-        "---\n"
-        "layout: default\n"
+        "---\nlayout: default\n"
         f'title: "{escape_yaml(title)}"\n'
         f'lab_id: "{lab}"\n'
         f'duration: "{duration}"\n'
-        f'stages: "{stage_value}"\n'
-        f'maturity: "{maturity}"\n'
-        f'permalink: "/Instructions/Exercises/{lab}.html"\n'
-        "---\n\n"
+        f'stages: "{",".join(stages)}"\n'
+        f'maturity: "{len(stages)}/{len(STAGES)}"\n'
+        f'permalink: "/Instructions/Exercises/{lab}.html"\n---\n\n'
     )
     wrapper = (
-        f"# {title}\n\n"
-        f"> **Lab:** {lab}  \n"
-        f"> **Duration:** {duration}  \n"
-        f"> **Learning loop:** LEARN → BUILD → VALIDATE → BREAK → FIX → CHALLENGE → SOLUTION → CLEANUP  \n"
-        f"> **Lab maturity:** {maturity}\n\n"
-        "## Exercise workflow\n\n"
-        "| Stage | Status |\n|---|---|\n"
+        f"# {title}\n\n> **Lab:** {lab}  \n> **Duration:** {duration}  \n"
+        "> **Learning loop:** LEARN → BUILD → VALIDATE → BREAK → FIX → CHALLENGE → SOLUTION → CLEANUP  \n"
+        f"> **Lab maturity:** {len(stages)}/{len(STAGES)}\n\n"
+        "## Exercise workflow\n\n| Stage | Status |\n|---|---|\n"
     )
     for stage, _ in STAGES:
-        status = "✅ present" if stage in stages else "🧩 to be completed"
-        wrapper += f"| **{stage}** | {status} |\n"
+        wrapper += f"| **{stage}** | {'✅ present' if stage in stages else '🧩 to be completed'} |\n"
     wrapper += (
-        "\n> **Important:** This GitHub Pages view is generated dynamically from the lab README. "
+        "\n> This GitHub Pages view is generated dynamically from the lab README. "
         "The repository README remains the source of truth.\n\n"
         f"> **Source:** {rel}\n\n"
     )
     (EXERCISES / f"{lab}.md").write_text(front_matter + wrapper + body, encoding="utf-8")
     lab_pages.append((lab, title, len(stages), len(STAGES)))
 
-index_lines = [
-    "---", "layout: default", "title: Exercises",
-    "permalink: /Instructions/Exercises/", "---", "",
-    "# Exercises", "",
-    "> Every exercise is generated from its repository README and published automatically.", "",
+index = [
+    "---","layout: default","title: Exercises",
+    "permalink: /Instructions/Exercises/","---","","# Exercises","",
+    "> Every exercise is generated from its repository README and published automatically.",""
 ]
-for lab, title, present, total in sorted(lab_pages, key=lambda x: x[0]):
-    index_lines.append(f"- [{title}]({lab}.html) — {present}/{total} learning stages")
-(EXERCISES / "index.md").write_text("\n".join(index_lines) + "\n", encoding="utf-8")
-
+for lab, title, present, total in sorted(lab_pages):
+    index.append(f"- [{title}]({lab}.html) — {present}/{total} learning stages")
+(EXERCISES / "index.md").write_text("\n".join(index) + "\n", encoding="utf-8")
 print(f"Generated {len(lab_pages)} exercise page(s).")

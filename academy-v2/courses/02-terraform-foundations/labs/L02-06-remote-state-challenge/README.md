@@ -1,48 +1,46 @@
 # L02-06-remote-state-challenge
 
 ## Business Scenario
-Enterprise engineering scenario.
+Enterprise remote-state engineering challenge.
 
 ## Mission
-Implement the capability and produce evidence.
+Design and validate a secure shared Terraform state boundary.
 
 ## Requirements
-Follow course requirements and least privilege.
+State isolation, locking, identity-based access and recovery evidence.
 
 ## Architecture
-Document the intended architecture before implementation.
+Document backend, identity and state access boundaries.
 
 ## Threat Model
-Identify trust boundaries and failure modes.
+Consider state disclosure, unauthorized mutation and concurrent execution.
 
 ## Prerequisites
-Use the academy environment.
+Use the academy Azure and Terraform environment.
 
 ## Starter Environment
-Use supplied starter assets.
+Use the course starter environment.
 
 ## Guided Tasks
-Execute incrementally and capture evidence.
+Establish the state design and validate it.
 
 ## Validation
-Run validation and record output.
+Capture init, plan and state evidence.
 
 ## Break/Fix
-Capture baseline evidence before injecting failure.
+Simulate an unsafe state access or configuration condition.
 
 ## Challenge
-Solve from requirements without procedural assistance.
+Recover safely without destroying unrelated state.
 
 ## Reference Solution
-Compare only after the challenge.
+Review after independent completion.
 
 ## Cleanup
-Remove lab resources and verify state.
+Remove temporary resources and verify state consistency.
 
 ## Evidence checklist
-- [ ] Architecture
-- [ ] Build
-- [ ] Validation
-- [ ] Break/Fix
-- [ ] Challenge
-- [ ] Cleanup
+- [ ] Backend design
+- [ ] Identity evidence
+- [ ] Locking evidence
+- [ ] Recovery evidence

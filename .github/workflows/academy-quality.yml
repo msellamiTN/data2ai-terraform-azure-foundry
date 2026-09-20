@@ -1,0 +1,46 @@
+name: DATA2AI Academy Quality Loop
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "academy-v2/**"
+      - "docs/scripts/**"
+      - ".github/workflows/**"
+  pull_request:
+    paths:
+      - "academy-v2/**"
+      - "docs/scripts/**"
+      - ".github/workflows/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality-loop:
+    name: Build → Validate → Break → Fix → Challenge
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Python syntax
+        run: python3 -m compileall -q academy-v2/scripts docs/scripts
+      - name: Academy maturity report
+        run: python3 academy-v2/scripts/academy-loop.py
+      - name: Generate Pages source
+        run: python3 docs/scripts/build-pages.py
+      - name: Validate Pages source
+        run: python3 docs/scripts/validate-pages.py
+      - name: Terraform executable-lab validation
+        shell: bash
+        run: |
+          set -e
+          if [ -d "academy-v2/courses/03-enterprise-terraform-azure-landing-zones/labs/L03-01-module-contract/starter" ]; then
+            cd academy-v2/courses/03-enterprise-terraform-azure-landing-zones/labs/L03-01-module-contract/starter
+            terraform fmt -check
+            terraform init -backend=false
+            terraform validate
+          fi
+      - name: Quality loop result
+        run: echo "RESULT: QUALITY LOOP PASS"

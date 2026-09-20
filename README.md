@@ -1,95 +1,35 @@
-# Data2AI Academy — Terraform + Azure AI Foundry
+# DATA2AI Academy — Elite Enterprise AI Platform Engineering
 
-> **Engineer AI infrastructure. Don’t just learn commands.**
+## New curriculum
 
-This repository is a **build-first, self-paced engineering academy**. The learner creates and edits project files, executes commands, reads outputs, validates Azure independently, diagnoses controlled failures, and completes challenges before opening reference solutions.
+This is the **new enterprise track** for DATA2AI Academy.
 
-## Learning loop
+> **Read less. Build more. Break it. Fix it. Explain it. Automate it. Defend it.**
 
-**LEARN → BUILD → RUN → READ OUTPUT → VALIDATE → BREAK → FIX → CHALLENGE → SOLUTION → CLEANUP**
+### Engineering loop
 
-## 11-course journey
+BUSINESS SCENARIO → REQUIREMENTS → ARCHITECTURE → THREAT MODEL → ADR → DESIGN → BUILD → VALIDATE → BREAK → DIAGNOSE → FIX → EXPLAIN → AUTOMATE → OPTIMIZE → DEFEND
 
-| Course | Outcome |
-|---|---|
-| 00 | Verified learner workstation and Azure identity |
-| 01 | Azure resources, CLI and RBAC fundamentals |
-| 02 | Terraform projects, variables, state, import and drift |
-| 03 | Maintainable Terraform on Azure |
-| 04 | Microsoft Foundry platform foundations |
-| 05 | End-to-end Foundry AI scenarios |
-| 06 | Secure AI platform engineering |
-| 07 | Enterprise Terraform architecture |
-| 08 | CI/CD and controlled promotion |
-| 09 | Observability, governance and FinOps |
-| 10 | Independent enterprise AI platform capstone |
+### Courses
 
-## Learner contract
+| # | Course | Core capability |
+|---|---|---|
+| 00 | Academy & Engineering Environment | Reproducible engineering workstation |
+| 01 | Azure Enterprise Foundations | Landing-zone thinking, identity, network, governance |
+| 02 | Terraform Foundations | HCL, state, import, drift and evidence |
+| 03 | Enterprise Terraform & Azure Landing Zones | AVM, modules, environments, promotion |
+| 04 | Microsoft Foundry Platform Engineering | AI platform provisioning and integration |
+| 05 | Agentic AI Engineering | Agents, tools, RAG, orchestration and evals |
+| 06 | Secure Enterprise AI Platform | Zero Trust, policy, identity and AI safety |
+| 07 | Enterprise AI Platform as Code | Platform composition and reusable contracts |
+| 08 | AI Platform DevSecOps | CI/CD, policy gates, testing and promotion |
+| 09 | AI Platform Operations, Reliability & FinOps | SRE, observability, governance and cost |
+| 10 | Enterprise Agentic AI Platform Capstone | Production simulation and defense |
 
-Every lab must answer four questions:
+Every course has Build, Validate, Break/Fix and Challenge dimensions.
 
-1. **What did I build?**
-2. **What did the command output prove?**
-3. **What failed and why?**
-4. **How did I prove the fix?**
+## Scenario Factory
 
-A successful `terraform apply` alone is **not sufficient evidence**.
+Scenarios are a transverse dimension of the academy. The reusable Scenario Factory, maturity ladder, Scenario × Course matrix and failure-injection catalog are documented under [`academy-v2/scenarios/`](scenarios/).
 
-## Standard lab structure
-
-```text
-MISSION
-  ↓
-CREATE / EDIT FILES
-  ↓
-RUN COMMAND
-  ↓
-READ OUTPUT
-  ↓
-VALIDATE
-  ↓
-BREAK
-  ↓
-DIAGNOSE
-  ↓
-FIX
-  ↓
-CHALLENGE
-  ↓
-SOLUTION
-  ↓
-CLEANUP
-```
-
-Start with [Learner Guide](./learner-guide.md).
-
-## Academy operating system
-
-- [Learner Guide](./learner/learner-guide.md)
-- [Instructor Guide](./instructor/instructor-guide.md)
-- [Lab Delivery Guide](./instructor/lab-delivery-guide.md)
-- [Lab Rubric](./instructor/grading-rubrics/lab-rubric.md)
-- [Common Failures](./instructor/troubleshooting/common-failures.md)
-- [Academy Release Standard](./docs/academy-release-standard.md)
-- [Lab Template](./docs/templates/lab-template.md)
-
-## GitHub Pages
-
-The learner-facing site is generated dynamically from the lab `README.md` files. The repository remains the source of truth; Pages is the execution-oriented presentation layer.
-
-**LEARN → BUILD → VALIDATE → BREAK → FIX → CHALLENGE → SOLUTION → CLEANUP**
-
-The Pages pipeline generates Microsoft Learning-style exercise pages, validates the generated page contract, builds Jekyll, and deploys through GitHub Pages.
-
-## Readiness policy
-
-A lab is not **READY** because Terraform syntax passes. READY requires executable implementation, real validation, controlled Break/Fix, independent Challenge, complete Solution, cleanup, and the learner/instructor contract. See the [Academy Release Standard](./docs/academy-release-standard.md).
-
-
-## NEW — Elite Enterprise AI Platform Track
-
-The redesigned enterprise curriculum is now available under [academy-v2](./academy-v2/).
-
-**Terraform → Azure Landing Zones → Microsoft Foundry → Agentic AI → Security → Platform as Code → DevSecOps → SRE/FinOps → Capstone**
-
-See the new curriculum at [academy-v2/README.md](./academy-v2/README.md) and the [Enterprise AI Platform reference architecture](./academy-v2/architecture/enterprise-ai-platform.md).
+Learning unit: **COURSE × SCENARIO × CAPABILITY × FAILURE MODE × EVIDENCE**.

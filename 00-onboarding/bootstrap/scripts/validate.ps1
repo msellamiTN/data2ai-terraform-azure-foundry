@@ -1,1 +1,0 @@
-Write-Host 'Validate identity, subscription, resource groups, tags, RBAC and required services.'

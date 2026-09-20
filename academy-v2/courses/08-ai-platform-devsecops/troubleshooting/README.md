@@ -1,0 +1,3 @@
+# AI Platform DevSecOps — Troubleshooting
+
+SYMPTOM → EVIDENCE → DIAGNOSIS → ROOT CAUSE → FIX → VALIDATION → PREVENTION
